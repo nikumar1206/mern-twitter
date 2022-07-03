@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 function SignUp(props) {
   const [state, setState] = useState({
     email: "",

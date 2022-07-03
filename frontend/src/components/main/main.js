@@ -1,5 +1,5 @@
 import React from "react";
-function MainPage(props) {
+function MainPage() {
   return (
     <div>
       <h1>A Twitter Clone</h1>
