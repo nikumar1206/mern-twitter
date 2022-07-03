@@ -3,20 +3,16 @@ import bcrypt from "bcryptjs";
 import passport from "passport";
 import User from "../../models/User.js";
 import jwt from "jsonwebtoken";
-const { sign } = jwt;
 import keys from "../../config/keys.js";
 const router = express.Router();
 
 import validateRegisterInput from "../../validation/register.js";
 import validateLoginInput from "../../validation/login.js";
 
-export default router.get("/test", (req, res) =>
-  res.json({ msg: "This is the users route" })
-);
+router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
-  console.log(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
   }
@@ -61,12 +57,17 @@ router.post("/login", (req, res) => {
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
         const payload = { id: user.id, handle: user.handle };
-        sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
-          res.json({
-            success: true,
-            token: "Bearer " + token,
-          });
-        });
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          { expiresIn: 3600 },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token,
+            });
+          }
+        );
       } else {
         errors.password = "Incorrect password";
         return res.status(400).json(errors);
@@ -86,3 +87,5 @@ router.get(
     });
   }
 );
+
+export default router;

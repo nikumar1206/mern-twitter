@@ -3,7 +3,6 @@ import validTxt from "./validate-text.js";
 
 const validateRegisterInput = (data) => {
   let errors = {};
-
   data.handle = validTxt(data.handle) ? data.handle : "";
   data.email = validTxt(data.email) ? data.email : "";
   data.password = validTxt(data.password) ? data.password : "";
@@ -40,10 +39,9 @@ const validateRegisterInput = (data) => {
   if (!validator.equals(data.password, data.password2)) {
     errors.password2 = "Passwords must match";
   }
-
   return {
     errors,
-    isvalid: Object.keys(errors).length === 0,
+    isValid: Object.keys(errors).length === 0,
   };
 };
 export default validateRegisterInput;
