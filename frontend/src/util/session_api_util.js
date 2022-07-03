@@ -8,6 +8,10 @@ export const setAuthToken = (token) => {
   }
 };
 
-export const signUp = (userData) => axios.post("/api/users/register", userData);
+export const signUp = (userData) => {
+  return axios.post("http://localhost:5001/api/users/register", userData);
+};
 
-export const logIn = (userData) => axios.post("/api/users/login", userData);
+export const logIn = (userData) => {
+  return axios.post("http://localhost:5001/api/users/login", userData);
+};

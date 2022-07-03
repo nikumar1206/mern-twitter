@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import passport from "passport";
+import cors from "cors";
 import * as PassportUtil from "./config/passport.js";
 import keys from "./config/keys.js";
 import users from "./routes/api/users.js";
@@ -15,6 +16,7 @@ mongoose
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 app.use(passport.initialize());
 PassportUtil.passportfunc(passport);
 
@@ -25,4 +27,4 @@ app.get("/", (req, res) => res.send("Hello World"));
 app.use("/api/users", users);
 app.use("/api/tweets", tweets);
 
-expressListRoutes(app, { prefix: "/api" });
+// expressListRoutes(app, { prefix: "/api" });

@@ -47,5 +47,4 @@ router.post(
     newTweet.save().then((tweet) => res.json(tweet));
   }
 );
-console.log(router.stack);
 export default router;
