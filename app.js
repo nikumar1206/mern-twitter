@@ -5,15 +5,12 @@ import mongoose from "mongoose";
 import passport from "passport";
 import cors from "cors";
 import * as PassportUtil from "./config/passport.js";
-import keys from "./config/keys.js";
+// import keys from "./config/keys.js";
 import users from "./routes/api/users.js";
 import tweets from "./routes/api/tweets.js";
 import expressListRoutes from "express-list-routes";
 const app = express();
-mongoose
-  .connect(keys.mongoURI, { useNewUrlParser: true })
-  .then(() => console.log("Connected to MongoDB successfully"))
-  .catch((err) => console.log(err));
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/build"));
