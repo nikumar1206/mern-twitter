@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 function LoginForm(props) {
   const [state, setState] = useState({
     email: "",
     password: "",
-    errors: {},
   });
-  //   useEffect(() => {
-  //     props.history.push("/tweets");
-  //     setState((state) => ({ ...state, errors: {} }));
-  //   }, [props.currentUser]);
+
+  useEffect(() => {
+    if (props.currentUser === true) {
+      props.history.push("/tweets");
+    }
+  }, [props.currentUser, props.history]);
 
   const update = (field) => {
     return (e) => setState(() => ({ ...state, [field]: e.target.value }));
@@ -18,18 +18,14 @@ function LoginForm(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let user = {
-      email: state.email,
-      password: state.password,
-    };
-    props.login(user);
-    props.history.push("/tweets");
+    props.login(state);
   };
+
   const renderErrors = () => {
     return (
       <ul>
-        {Object.keys(state.errors).map((error, i) => (
-          <li key={`error-${i}`}>{state.errors[error]}</li>
+        {Object.keys(props.errors).map((error, i) => (
+          <li key={`error-${i}`}>{props.errors[error]}</li>
         ))}
       </ul>
     );

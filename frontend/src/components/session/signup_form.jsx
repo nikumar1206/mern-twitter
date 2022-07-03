@@ -1,32 +1,32 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 function SignUp(props) {
   const [state, setState] = useState({
     email: "",
     handle: "",
     password: "",
     password2: "",
-    errors: {},
   });
+
   const update = (field) => {
     return (e) => setState(() => ({ ...state, [field]: e.target.value }));
   };
+
+  useEffect(() => {
+    if (props.isAuthenticated === true) {
+      props.history.push("/tweets");
+    }
+  }, [props.history, props.isAuthenticated]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    let user = {
-      email: state.email,
-      handle: state.handle,
-      password: state.password,
-      password2: state.password2,
-    };
-
-    props.signup(user, props.history);
+    props.signup(state);
   };
+
   const renderErrors = () => {
     return (
       <ul>
-        {Object.keys(state.errors).map((error, i) => (
-          <li key={`error-${i}`}>{state.errors[error]}</li>
+        {Object.keys(props.errors).map((error, i) => (
+          <li key={`error-${i}`}>{props.errors[error]}</li>
         ))}
       </ul>
     );
@@ -73,4 +73,4 @@ function SignUp(props) {
   );
 }
 
-export default withRouter(SignUp);
+export default SignUp;
