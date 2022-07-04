@@ -10,7 +10,8 @@ import users from "./routes/api/users.js";
 import tweets from "./routes/api/tweets.js";
 import expressListRoutes from "express-list-routes";
 const app = express();
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
+
+mongoose.connect(keys.default.mongoURI, { useNewUrlParser: true });
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/build"));

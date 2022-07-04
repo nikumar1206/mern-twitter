@@ -4,7 +4,7 @@ import User from "../models/User.js";
 
 const options = {};
 options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-options.secretOrKey = keys.secretOrKey;
+options.secretOrKey = keys.default.secretOrKey;
 
 export const passportfunc = (passport) => {
   passport.use(
