@@ -11,7 +11,10 @@ import tweets from "./routes/api/tweets.js";
 import expressListRoutes from "express-list-routes";
 const app = express();
 
-mongoose.connect(keys.default.mongoURI, { useNewUrlParser: true });
+mongoose
+  .connect(keys.default.mongoURI, { useNewUrlParser: true })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.log(err));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/build"));

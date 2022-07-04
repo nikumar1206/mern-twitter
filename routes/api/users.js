@@ -41,7 +41,7 @@ router.post("/register", (req, res) => {
 
             jwt.sign(
               payload,
-              keys.secretOrKey,
+              keys.default.secretOrKey,
               { expiresIn: 3600 },
               (err, token) => {
                 res.json({
@@ -75,7 +75,7 @@ router.post("/login", (req, res) => {
         const payload = { id: user.id, handle: user.handle };
         jwt.sign(
           payload,
-          keys.secretOrKey,
+          keys.default.secretOrKey,
           { expiresIn: 3600 },
           (err, token) => {
             res.json({

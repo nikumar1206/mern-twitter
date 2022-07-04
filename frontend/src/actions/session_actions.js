@@ -60,6 +60,7 @@ export const signUp = (user) => (dispatch) =>
 export const logIn = (user) => (dispatch) =>
   SessionAPI.logIn(user)
     .then((res) => {
+      console.log(res);
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
       SessionAPI.setAuthToken(token);
